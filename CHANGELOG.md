@@ -4,7 +4,7 @@
 
 <section class="release" id="unreleased">
 
-## Unreleased (2026-07-27)
+## Unreleased (2026-07-31)
 
 <section class="features">
 
@@ -22,6 +22,7 @@
 
 <details>
 
+-   [`430fdea`](https://github.com/stdlib-js/stdlib/commit/430fdea947428af11c0e75dc6f6a0bd3cbd13e88) - **chore:** clean-up [(#13805)](https://github.com/stdlib-js/stdlib/pull/13805) _(by Philipp Burckhardt)_
 -   [`49960a0`](https://github.com/stdlib-js/stdlib/commit/49960a0f18a9c97ead1862d2aa53432c8085285d) - **chore:** clean-up [(#13695)](https://github.com/stdlib-js/stdlib/pull/13695) _(by Philipp Burckhardt, Athan Reines)_
 -   [`c19010a`](https://github.com/stdlib-js/stdlib/commit/c19010a5833c251b63a3cf6f7a92f51e3d4bafaf) - **feat:** add `blas/ext/base/zcartesian-product` [(#12646)](https://github.com/stdlib-js/stdlib/pull/12646) _(by Muhammad Haris, Athan Reines)_
 
