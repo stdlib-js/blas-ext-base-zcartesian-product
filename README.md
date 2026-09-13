@@ -35,32 +35,38 @@ limitations under the License.
 
 > Compute the Cartesian product for two double-precision complex floating-point strided arrays.
 
-<section class="installation">
 
-## Installation
-
-```bash
-npm install @stdlib/blas-ext-base-zcartesian-product
-```
-
-Alternatively,
-
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
 
 <section class="usage">
 
 ## Usage
 
+To use in Observable,
+
 ```javascript
-var zcartesianProduct = require( '@stdlib/blas-ext-base-zcartesian-product' );
+zcartesianProduct = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-zcartesian-product@umd/browser.js' )
+```
+
+To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
+
+```javascript
+var zcartesianProduct = require( 'path/to/vendor/umd/blas-ext-base-zcartesian-product/index.js' )
+```
+
+To include the bundle in a webpage,
+
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-zcartesian-product@umd/browser.js"></script>
+```
+
+If no recognized module system is present, access bundle contents via the global scope:
+
+```html
+<script type="text/javascript">
+(function () {
+    window.zcartesianProduct;
+})();
+</script>
 ```
 
 #### zcartesianProduct( order, M, N, x, strideX, y, strideY, out, LDO )
@@ -197,11 +203,16 @@ zcartesianProduct.ndarray( 2, 2, x, 1, 1, y, 1, 1, out, 2, 1, 0 );
 
 <!-- eslint no-undef: "error" -->
 
-```javascript
-var uniform = require( '@stdlib/random-array-uniform' );
-var logEach = require( '@stdlib/console-log-each' );
-var Complex128Array = require( '@stdlib/array-complex128' );
-var zcartesianProduct = require( '@stdlib/blas-ext-base-zcartesian-product' );
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-array-uniform@umd/browser.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/console-log-each@umd/browser.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-complex128@umd/browser.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-zcartesian-product@umd/browser.js"></script>
+<script type="text/javascript">
+(function () {
 
 var M = 3;
 var N = 2;
@@ -218,6 +229,11 @@ var out = new Complex128Array( M * N * 2 );
 // Compute the Cartesian product:
 zcartesianProduct( 'row-major', M, N, x, 1, y, 1, out, 2 );
 logEach( '%s', out );
+
+})();
+</script>
+</body>
+</html>
 ```
 
 </section>
@@ -226,159 +242,7 @@ logEach( '%s', out );
 
 <!-- C interface documentation. -->
 
-* * *
 
-<section class="c">
-
-## C APIs
-
-<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
-
-<section class="intro">
-
-</section>
-
-<!-- /.intro -->
-
-<!-- C usage documentation. -->
-
-<section class="usage">
-
-### Usage
-
-```c
-#include "stdlib/blas/ext/base/zcartesian_product.h"
-```
-
-<!--lint disable maximum-heading-length-->
-
-#### stdlib_strided_zcartesian_product( order, M, N, \*X, strideX, \*Y, strideY, \*Out, LDO )
-
-<!--lint enable maximum-heading-length-->
-
-Computes the Cartesian product for two double-precision complex floating-point strided arrays.
-
-```c
-#include "stdlib/complex/float64/ctor.h"
-
-const double x[] = { 1.0, 2.0, 3.0, 4.0 };
-const double y[] = { 5.0, 6.0, 7.0, 8.0 };
-double out[ 16 ];
-
-stdlib_strided_zcartesian_product( CblasRowMajor, 2, 2, (stdlib_complex128_t *)x, 1, (stdlib_complex128_t *)y, 1, (stdlib_complex128_t *)out, 2 );
-```
-
-The function accepts the following arguments:
-
--   **order**: `[in] CBLAS_LAYOUT` storage layout.
--   **M**: `[in] CBLAS_INT` number of indexed elements in `X`.
--   **N**: `[in] CBLAS_INT` number of indexed elements in `Y`.
--   **X**: `[in] stdlib_complex128_t*` first input array.
--   **strideX**: `[in] CBLAS_INT` stride length for `X`.
--   **Y**: `[in] stdlib_complex128_t*` second input array.
--   **strideY**: `[in] CBLAS_INT` stride length for `Y`.
--   **Out**: `[out] stdlib_complex128_t*` output array.
--   **LDO**: `[in] CBLAS_INT` stride length between successive contiguous vectors of the matrix `Out` (a.k.a., leading dimension of `Out`). For row-major order, must be greater than or equal to `2`. For column-major order, must be greater than or equal to `max(1,M*N)`.
-
-```c
-void stdlib_strided_zcartesian_product( const CBLAS_LAYOUT order, const CBLAS_INT M, const CBLAS_INT N, const stdlib_complex128_t *X, const CBLAS_INT strideX, const stdlib_complex128_t *Y, const CBLAS_INT strideY, stdlib_complex128_t *Out, const CBLAS_INT LDO );
-```
-
-<!--lint disable maximum-heading-length-->
-
-#### stdlib_strided_zcartesian_product_ndarray( M, N, \*X, strideX, offsetX, \*Y, strideY, offsetY, \*Out, strideOut1, strideOut2, offsetOut )
-
-<!--lint enable maximum-heading-length-->
-
-Computes the Cartesian product for two double-precision complex floating-point strided arrays using alternative indexing semantics.
-
-```c
-#include "stdlib/complex/float64/ctor.h"
-
-const double x[] = { 1.0, 2.0, 3.0, 4.0 };
-const double y[] = { 5.0, 6.0, 7.0, 8.0 };
-double out[ 16 ];
-
-stdlib_strided_zcartesian_product_ndarray( 2, 2, (stdlib_complex128_t *)x, 1, 0, (stdlib_complex128_t *)y, 1, 0, (stdlib_complex128_t *)out, 2, 1, 0 );
-```
-
-The function accepts the following arguments:
-
--   **M**: `[in] CBLAS_INT` number of indexed elements in `X`.
--   **N**: `[in] CBLAS_INT` number of indexed elements in `Y`.
--   **X**: `[in] stdlib_complex128_t*` first input array.
--   **strideX**: `[in] CBLAS_INT` stride length for `X`.
--   **offsetX**: `[in] CBLAS_INT` starting index for `X`.
--   **Y**: `[in] stdlib_complex128_t*` second input array.
--   **strideY**: `[in] CBLAS_INT` stride length for `Y`.
--   **offsetY**: `[in] CBLAS_INT` starting index for `Y`.
--   **Out**: `[out] stdlib_complex128_t*` output array.
--   **strideOut1**: `[in] CBLAS_INT` stride length for the first dimension of `Out`.
--   **strideOut2**: `[in] CBLAS_INT` stride length for the second dimension of `Out`.
--   **offsetOut**: `[in] CBLAS_INT` starting index for `Out`.
-
-```c
-void stdlib_strided_zcartesian_product_ndarray( const CBLAS_INT M, const CBLAS_INT N, const stdlib_complex128_t *X, const CBLAS_INT strideX, const CBLAS_INT offsetX, const stdlib_complex128_t *Y, const CBLAS_INT strideY, const CBLAS_INT offsetY, stdlib_complex128_t *Out, const CBLAS_INT strideOut1, const CBLAS_INT strideOut2, const CBLAS_INT offsetOut );
-```
-
-</section>
-
-<!-- /.usage -->
-
-<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
-
-<section class="notes">
-
-</section>
-
-<!-- /.notes -->
-
-<!-- C API usage examples. -->
-
-<section class="examples">
-
-### Examples
-
-```c
-#include "stdlib/blas/ext/base/zcartesian_product.h"
-#include "stdlib/complex/float64/ctor.h"
-#include "stdlib/blas/base/shared.h"
-#include <stdio.h>
-
-int main( void ) {
-    // Create strided input arrays (interleaved real and imaginary components):
-    const double X[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 };
-    const double Y[] = { 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 };
-
-    // Specify the number of indexed elements:
-    const int M = 4;
-    const int N = 4;
-
-    // Create an output array (M*N pairs, each pair has 2 elements):
-    double out[ 64 ];
-
-    // Specify strides:
-    const int strideX = 1;
-    const int strideY = 1;
-    const int LDO = 2;
-
-    // Compute the Cartesian product:
-    stdlib_strided_zcartesian_product( CblasRowMajor, M, N, (const stdlib_complex128_t *)X, strideX, (const stdlib_complex128_t *)Y, strideY, (stdlib_complex128_t *)out, LDO );
-
-    // Print the result:
-    for ( int i = 0; i < M*N*2; i++ ) {
-        printf( "out[ %i ] = ( %lf, %lf )\n", i, out[ i*2 ], out[ (i*2)+1 ] );
-    }
-}
-```
-
-</section>
-
-<!-- /.examples -->
-
-</section>
-
-<!-- /.c -->
 
 <!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
 
@@ -460,7 +324,7 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/blas-ext-base-zcartesian-product/main/LICENSE
 
-[@stdlib/array/complex128]: https://github.com/stdlib-js/array-complex128
+[@stdlib/array/complex128]: https://github.com/stdlib-js/array-complex128/tree/umd
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
